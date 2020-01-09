@@ -28,8 +28,6 @@ public class ShapeService {
 	
 	@Autowired ShapeRepository shapeRepository;
 	
-	//private ModelMapper modelMapper = new ModelMapper();
-	
 	public void persistShape(ShapeDTO shapeDTO)
 	{
 		ModelMapper modelMapper = new ModelMapper();
@@ -82,11 +80,6 @@ public class ShapeService {
 			{
 				throw new InvalidSquareCoordinates(COORDINATES_NOT_VALID);  // Conditions to validate a proper square coordinate
 			}
-			/*
-			 * if(x1==x2 || y1==y2 || (x1==x2 && y1==y2) || (x1==y1 && x2==y2)) //
-			 * Conditions to validate a proper square coordinate { throw new
-			 * InvalidSquareCoordinates(COORDINATES_NOT_VALID); }
-			 */
 		}
 		catch(NumberFormatException e)
 		{

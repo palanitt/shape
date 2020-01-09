@@ -43,9 +43,6 @@ public class ShapeServiceTest {
 	@Test
 	public void givenRetrieveAllShapesRequest_whenAvailable_thenRetrieve()
 	{
-		//List<ShapeEntity> shapeEntityList = new ArrayList<>();
-		//shapeEntityList.add(ShapeEntity.builder().id(0).type("square").name("square1").shapeCoordinates("0,0:5,4").build());
-		//shapeEntityList.add(ShapeEntity.builder().id(1).type("square").name("square2").shapeCoordinates("2,0:6,5").build());
 		shapeService.retrieveShapes();
 		verify(shapeRepository, times(1)).findAll();
 	}

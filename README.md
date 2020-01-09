@@ -5,6 +5,8 @@ The following assumptions have been made with respect to square shape,
  	- bottom left x,y coordinates and
  	- top right x,y coordinates
 - Example coordinates for a valid square shape is bottomLeft(0,0) and topRight(1,1)
+
+Considerations taken during processing of square shapes
 - For the sake of storing the coordinates in the data store, following format has been used (0,0:1,1). It will be
 stored as a string content within the database. While processing the value, it will be split based on ':'
 delimiter and the integer values would be parsed.
@@ -14,6 +16,13 @@ delimiter and the integer values would be parsed.
 	{
 		System.out.println("Not a valid square shape")
 	}
+- Square shapes with duplicate names are not allowed to be stored using the UNIQUE constraint on the 'name' column in H2 DB.
+
+Following HTTPS Status codes have been used:
+ - 201 - For entities created
+ - 200 - For retrieving entities
+ - 409 - For input shapes with duplicate names
+ - 422 - For all validation scenarios
 	
 Following dependencies are used in this project:
  - Spring data JPA which provides hibernate for ORM mapping
@@ -52,5 +61,21 @@ There are 3 ways,
  the following command. 
  Note:- This requires java 8 or above to be available in the system
  - java -jar shape-0.0.1-SNAPSHOT.jar
+ 
+ Sample POST request:
+ 
+ Request URL: http://localhost:8080/shape (remember to change port if its not deployed in 8080)
+ Request Header:
+ Content-Type: application/json
+ Request Payload:
+ {
+"type":"square",
+"name":"square2",
+"shapeCoordinates":"0,0:1,1"
+}
+
+ Sample GET request:
+ Request URL: https://localhost:808/shape (remember to change port if its not deployed in 8080)
+ 
   
   
