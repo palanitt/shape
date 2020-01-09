@@ -44,7 +44,7 @@ There are 3 ways,
   
  Approach 1:
  - Go to the project root directory and run the following commands. 
- Note:- This requires maven command line to be 
+ 	-	Note:- This requires maven command line to be 
  available in the system*
   mvn clean install
   mvn spring-boot:run
@@ -52,14 +52,14 @@ There are 3 ways,
  Approach 2:
  - Go to the project root directory and run the following commands to run the application as a docker
  container. 
- Note:- This requires docker engine to be available in the system/virtual machine
+ 	-	Note:- This requires docker engine to be available in the system/virtual machine
  - docker build -t shape-app .
  - docker run -p 8090:8080 shape-app, where 8090 is the host port and 8080 is the container port.
  
  Approach 3:
  - Go to the target folder under the project root directory and run the jar as a java application using 
  the following command. 
- Note:- This requires java 8 or above to be available in the system
+ 	-	Note:- This requires java 8 or above to be available in the system
  - java -jar shape-0.0.1-SNAPSHOT.jar
  
  Sample POST request:
@@ -68,11 +68,11 @@ There are 3 ways,
  - Request Header:
  - Content-Type: application/json
  - Request Payload:
- {
-"type":"square",
-"name":"square2",
-"shapeCoordinates":"0,0:1,1"
-}
+		 {
+		"type":"square",
+		"name":"square2",
+		"shapeCoordinates":"0,0:1,1"
+		}
 
  Sample GET request:
  

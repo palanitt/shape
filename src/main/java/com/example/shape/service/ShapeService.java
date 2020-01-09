@@ -1,6 +1,7 @@
 package com.example.shape.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeToken;
@@ -25,6 +26,7 @@ public class ShapeService {
 	private static final String ONLY_NUMBERS = "Shape coordinates should contain only numbers";
 	private static final String COORDINATES_NOT_VALID = "Coordinates are not valid for a square shape";
 	private static final String ALREADY_EXISTS = "Shape name already exists";
+	private static final String OVERLAP_OCCURRED = "Input square seems to overlap with one of the stored squares";
 	
 	@Autowired ShapeRepository shapeRepository;
 	
@@ -96,13 +98,13 @@ public class ShapeService {
 	public void shapeOverlapCheck(List<ShapeEntity> shapeEntityList, ShapeDTO shapeDTO)
 	{
 		Square inputSquare = buildSquareModel(shapeDTO.getShapeCoordinates());
-		long overlapCount = shapeEntityList
+		Optional<ShapeEntity> overlapInstance = shapeEntityList
 				.stream()
 				.filter(s -> checkOverlap(buildSquareModel(s.getShapeCoordinates()), inputSquare))
-				.count();
-		if(overlapCount >= 1)
+				.findFirst();
+		if(overlapInstance.isPresent())
 		{
-			throw new SquareOverlapException("Square Overlap deducted");
+			throw new SquareOverlapException(OVERLAP_OCCURRED);
 		}
 	}
 	
