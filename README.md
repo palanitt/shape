@@ -12,10 +12,10 @@ stored as a string content within the database. While processing the value, it w
 delimiter and the integer values would be parsed.
 	- 0,0:1,1 - here 0,0 represents bottomLeft and 1,1 represents topRight
 - Condition to check if a shape hsa a proper square coordinates values is as below
-	if((x2-x1) <= 0 || (y2-y1) <=0 || (x2-x1) != (y2-y1))
-	{
-		System.out.println("Not a valid square shape")
-	}
+	- if((x2-x1) <= 0 || (y2-y1) <=0 || (x2-x1) != (y2-y1))
+		{
+			System.out.println("Not a valid square shape")
+		}
 - Square shapes with duplicate names are not allowed to be stored using the UNIQUE constraint on the 'name' column in H2 DB.
 
 Following HTTPS Status codes have been used:
