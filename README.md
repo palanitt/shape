@@ -1,7 +1,7 @@
 RESTful API service for a Shape repository
 
-The following assumptions have been made with respect to square shape
- - Square shape are considered to have 2 (x,y) coordinate values
+The following assumptions have been made with respect to square shape,
+ - Square shapes are considered to have 2 (x,y) coordinate values
  	- bottom left x,y coordinates and
  	- top right x,y coordinates
 - Example coordinates for a valid square shape is bottomLeft(0,0) and topRight(1,1)
@@ -34,20 +34,23 @@ There are 3 ways,
   git clone https://github.com/palanitt/shape.git
   
  Approach 1:
- - Go to the project root directory and run the following commands. *This requires maven command line to be 
+ - Go to the project root directory and run the following commands. 
+ Note:- This requires maven command line to be 
  available in the system*
   mvn clean install
   mvn spring-boot:run
   
  Approach 2:
  - Go to the project root directory and run the following commands to run the application as a docker
- container. *This requires docker engine to be available in the system*
+ container. 
+ Note:- This requires docker engine to be available in the system/virtual machine
  - docker build -t shape-app .
  - docker run -p 8090:8080 shape-app, where 8090 is the host port and 8080 is the container port.
  
  Approach 3:
  - Go to the target folder under the project root directory and run the jar as a java application using 
- the following command. *This requires java 8 or above to be available in the system*
+ the following command. 
+ Note:- This requires java 8 or above to be available in the system
  - java -jar shape-0.0.1-SNAPSHOT.jar
   
   
