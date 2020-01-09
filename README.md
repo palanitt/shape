@@ -64,10 +64,10 @@ There are 3 ways,
  
  Sample POST request:
  
- Request URL: http://localhost:8080/shape (remember to change port if its not deployed in 8080)
- Request Header:
- Content-Type: application/json
- Request Payload:
+ - Request URL: http://localhost:8080/shape (remember to change port if its not deployed in 8080)
+ - Request Header:
+ - Content-Type: application/json
+ - Request Payload:
  {
 "type":"square",
 "name":"square2",
@@ -75,7 +75,8 @@ There are 3 ways,
 }
 
  Sample GET request:
- Request URL: https://localhost:808/shape (remember to change port if its not deployed in 8080)
+ 
+ - Request URL: https://localhost:808/shape (remember to change port if its not deployed in 8080)
  
   
   
