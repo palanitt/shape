@@ -66,22 +66,27 @@ public class ShapeService {
 		{
 			throw new ShapeCoordinatesException(PROPER_SQUARE_COORDINATES);
 		}
-		String[] shapeCoordinates1 = shapeCoordinates[0].split(",");
-		String[] shapeCoordinates2 = shapeCoordinates[1].split(",");
-		if (shapeCoordinates1.length != 2 || shapeCoordinates2.length != 2)
+		String[] bottomLeft = shapeCoordinates[0].split(",");
+		String[] topRight = shapeCoordinates[1].split(",");
+		if (bottomLeft.length != 2 || topRight.length != 2)
 		{
 			throw new ShapeCoordinatesException(PROPER_SQUARE_COORDINATES);
 		}
 		try
 		{ // convert the string to integer values
-			int x1 = Integer.parseInt(shapeCoordinates1[0]);
-			int y1 = Integer.parseInt(shapeCoordinates1[1]);
-			int x2 = Integer.parseInt(shapeCoordinates2[0]);
-			int y2 = Integer.parseInt(shapeCoordinates2[1]);
-			if(x1==x2 || y1==y2 || (x1==x2 && y1==y2) || (x1==y1 && x2==y2)) // Conditions to validate a proper square coordinate
+			int x1 = Integer.parseInt(bottomLeft[0]);
+			int y1 = Integer.parseInt(bottomLeft[1]);
+			int x2 = Integer.parseInt(topRight[0]);
+			int y2 = Integer.parseInt(topRight[1]);
+			if((x2-x1) <= 0 || (y2-y1) <=0 || (x2-x1) != (y2-y1))
 			{
-				throw new InvalidSquareCoordinates(COORDINATES_NOT_VALID);
+				throw new InvalidSquareCoordinates(COORDINATES_NOT_VALID);  // Conditions to validate a proper square coordinate
 			}
+			/*
+			 * if(x1==x2 || y1==y2 || (x1==x2 && y1==y2) || (x1==y1 && x2==y2)) //
+			 * Conditions to validate a proper square coordinate { throw new
+			 * InvalidSquareCoordinates(COORDINATES_NOT_VALID); }
+			 */
 		}
 		catch(NumberFormatException e)
 		{

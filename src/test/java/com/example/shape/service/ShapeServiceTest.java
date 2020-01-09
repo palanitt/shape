@@ -88,7 +88,7 @@ public class ShapeServiceTest {
 	@Test
 	public void givenInputShape_whenCoordinatesContainProperXYValues_thenNoExceptionThrown()
 	{
-		shapeDTO.setShapeCoordinates("4,6:5,8");
+		shapeDTO.setShapeCoordinates("4,6:5,7");
 		shapeService.validateShapeCoordinates(shapeDTO);
 	}
 	
