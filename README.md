@@ -21,9 +21,11 @@ There are 2 end points in the resource class
 - GET /shape API - to retrieve all the square shapes available in the data store
 
 How to Build and run?
-There are 2 ways
-- First use following commands to pull the contents from github 
+There are 3 ways,
+
+- First use the following commands to pull the contents from github 
   and start the build.
+  
   git clone https://github.com/palanitt/shape.git
   
  Approach 1:
