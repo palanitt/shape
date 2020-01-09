@@ -5,9 +5,6 @@ import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -46,11 +43,10 @@ public class ShapeServiceTest {
 	@Test
 	public void givenRetrieveAllShapesRequest_whenAvailable_thenRetrieve()
 	{
-		List<ShapeEntity> shapeEntityList = new ArrayList<>();
-		shapeEntityList.add(ShapeEntity.builder().id(0).type("square").name("square1").shapeCoordinates("0,0:5,4").build());
-		shapeEntityList.add(ShapeEntity.builder().id(1).type("square").name("square2").shapeCoordinates("2,0:6,5").build());
+		//List<ShapeEntity> shapeEntityList = new ArrayList<>();
+		//shapeEntityList.add(ShapeEntity.builder().id(0).type("square").name("square1").shapeCoordinates("0,0:5,4").build());
+		//shapeEntityList.add(ShapeEntity.builder().id(1).type("square").name("square2").shapeCoordinates("2,0:6,5").build());
 		shapeService.retrieveShapes();
-		//when(shapeRepository.findAll()).thenReturn(shapeEntityList);
 		verify(shapeRepository, times(1)).findAll();
 	}
 	
@@ -86,6 +82,13 @@ public class ShapeServiceTest {
 	public void givenInputShape_whenCoordinatesDontContainProperXYValues_thenthrowException()
 	{
 		shapeDTO.setShapeCoordinates("0,4");
+		shapeService.validateShapeCoordinates(shapeDTO);
+	}
+	
+	@Test
+	public void givenInputShape_whenCoordinatesContainProperXYValues_thenNoExceptionThrown()
+	{
+		shapeDTO.setShapeCoordinates("4,6:5,8");
 		shapeService.validateShapeCoordinates(shapeDTO);
 	}
 	

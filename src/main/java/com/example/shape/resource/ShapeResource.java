@@ -37,15 +37,15 @@ public class ShapeResource {
 		}
 		catch(SquareOverlapException e)
 		{
-			return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getMessage());
 		}
 		catch(ShapeCoordinatesException e)
 		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getMessage());
 		}
 		catch(InvalidSquareCoordinates e)
 		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+			return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(e.getMessage());
 		}
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body("Square shape stored successfully");

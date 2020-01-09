@@ -1,9 +1,9 @@
 package com.example.shape.service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
@@ -27,6 +27,8 @@ public class ShapeService {
 	private static final String ALREADY_EXISTS = "Shape name already exists";
 	
 	@Autowired ShapeRepository shapeRepository;
+	
+	//private ModelMapper modelMapper = new ModelMapper();
 	
 	public void persistShape(ShapeDTO shapeDTO)
 	{
@@ -59,23 +61,23 @@ public class ShapeService {
 	public void validateShapeCoordinates(ShapeDTO shapeDTO)
 	{
 
-		String[] shapeCoords = shapeDTO.getShapeCoordinates().split(":");
-		if (shapeCoords.length != 2)
+		String[] shapeCoordinates = shapeDTO.getShapeCoordinates().split(":");
+		if (shapeCoordinates.length != 2)
 		{
 			throw new ShapeCoordinatesException(PROPER_SQUARE_COORDINATES);
 		}
-		String[] shapeCoords1 = shapeCoords[0].split(",");
-		String[] shapeCoords2 = shapeCoords[1].split(",");
-		if (shapeCoords1.length != 2 || shapeCoords2.length != 2)
+		String[] shapeCoordinates1 = shapeCoordinates[0].split(",");
+		String[] shapeCoordinates2 = shapeCoordinates[1].split(",");
+		if (shapeCoordinates1.length != 2 || shapeCoordinates2.length != 2)
 		{
 			throw new ShapeCoordinatesException(PROPER_SQUARE_COORDINATES);
 		}
 		try
-		{
-			int x1 = Integer.parseInt(shapeCoords1[0]);
-			int y1 = Integer.parseInt(shapeCoords1[1]);
-			int x2 = Integer.parseInt(shapeCoords2[0]);
-			int y2 = Integer.parseInt(shapeCoords2[1]);
+		{ // convert the string to integer values
+			int x1 = Integer.parseInt(shapeCoordinates1[0]);
+			int y1 = Integer.parseInt(shapeCoordinates1[1]);
+			int x2 = Integer.parseInt(shapeCoordinates2[0]);
+			int y2 = Integer.parseInt(shapeCoordinates2[1]);
 			if(x1==x2 || y1==y2 || (x1==x2 && y1==y2) || (x1==y1 && x2==y2)) // Conditions to validate a proper square coordinate
 			{
 				throw new InvalidSquareCoordinates(COORDINATES_NOT_VALID);
@@ -107,9 +109,9 @@ public class ShapeService {
 	}
 	
 	// validate if there is an overlap between an input square shape and a stored square shape
-	public boolean checkOverlap(Square square1, Square square2)
+	public boolean checkOverlap(Square storedSquare, Square inputSquare)
 	{
-		return square1.isOverlapping(square2);
+		return inputSquare.isOverlapping(storedSquare);
 	}
 	
 	// build a square object using the coordinate values
@@ -131,15 +133,9 @@ public class ShapeService {
 	// retrieve all the shapes from the 
 	public List<ShapeDTO> retrieveShapes()
 	{
-		List<ShapeEntity> shapeEntity = shapeRepository.findAll();
-		return shapeEntity.stream().map(s -> mapToShapeDTO(s)).collect(Collectors.toList()); 
+		ModelMapper modelMapper = new ModelMapper();
+		List<ShapeEntity> shapeEntityList = shapeRepository.findAll();
+		return modelMapper.map(shapeEntityList, new TypeToken<List<ShapeDTO>>(){}.getType()); 
 	}
 	
-	// map the entity object to the DTO object
-	public ShapeDTO mapToShapeDTO(ShapeEntity shapeEntity)
-	{
-		ModelMapper modelMapper = new ModelMapper();
-		ShapeDTO shapeDTO = modelMapper.map(shapeEntity, ShapeDTO.class);
-		return shapeDTO;
-	}
 }
